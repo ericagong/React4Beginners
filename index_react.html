@@ -13,8 +13,29 @@
     <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script> 
     <!-- import React DOM :: Put all react element to html body -->
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-    <script>
+    <script src="https://unpkg.com/@babel/standalone@7.17.7/babel.min.js"></script>
+    <script type="text/babel"> // add type property to script for using BABEL
         const root = document.getElementById("root");
+        // usint JSX and BABEL (BABEL translate JSX into React.createElement() form)
+        const Span = () => (
+            <span id="title" onMouseEnter={() => console.log("Mouse is on span!")}>
+            Hello, I'm your first span!
+            </span>
+        ); // Name of the component should start with Upper case
+        const Btn = () => (
+            <button id="btn" style={{backgroundColor: "beige"}} onClick={() => console.log("I'm clicked!")}>
+            Click me! 
+            </button>
+        );
+        const container = (
+            <div>
+                <Span/> 
+                <Btn/>
+            </div>
+        );
+        ReactDOM.render(container, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
+        //using React.createElement()
+        /*
         const span = React.createElement(
             "span", 
             {
@@ -23,13 +44,16 @@
             onMouseEnter : () => console.log("Mouse is on span!")
             }, 
             "Hello, I'm your first span!"); // React.createElement("htmlTagName", {propertyName : "propertyContent", ... }, "contents")
+        */
+        /*
         const btn = React.createElement(
             "button", 
             {
+            style: {backgroundColor: "beige"},
             onClick: () => console.log("I'm clicked!")
             }, 
             "Click me!"); // React.createElement("htmlTagName", {eventListener : arrow function }, "contents")
-        const container = React.createElement("div", null, [span, btn]);
-        ReactDOM.render(container, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
+        */
+        /*const container = React.createElement("div", null, [span, btn]);*/
     </script>
 </html>
