@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>React</title>
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+    <!-- import React :: interactively create elements in JS and React automatically translates elements to HTML -->
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script> 
+    <!-- import React DOM :: Put all react element to html body -->
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script>
+        const root = document.getElementById("root");
+        const span = React.createElement(
+            "span", 
+            {
+            id : "first-span", 
+            style : {color : "black"},
+            onMouseEnter : () => console.log("Mouse is on span!")
+            }, 
+            "Hello, I'm your first span!"); // React.createElement("htmlTagName", {propertyName : "propertyContent", ... }, "contents")
+        const btn = React.createElement(
+            "button", 
+            {
+            onClick: () => console.log("I'm clicked!")
+            }, 
+            "Click me!"); // React.createElement("htmlTagName", {eventListener : arrow function }, "contents")
+        const container = React.createElement("div", null, [span, btn]);
+        ReactDOM.render(container, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
+    </script>
+</html>
