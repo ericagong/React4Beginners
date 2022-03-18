@@ -16,20 +16,31 @@
     <script src="https://unpkg.com/@babel/standalone@7.17.7/babel.min.js"></script>
     <script type="text/babel"> // add type property to script for using BABEL
         const root = document.getElementById("root");
-        let counter = 0;
+        // manual rerender
+        // let counter = 0;
+        /*
         function countUp() {
             counter = counter + 1;
             render();
         }
         function render() {
-            ReactDOM.render(<Container/>, root);
+            ReactDOM.render(<App/>, root);
         }
-        const Container = () => (
-            <div>
-                <h3>Total Clicks: {counter}</h3>
-                <button onClick={countUp}>Click me!</button>
-            </div>
-        );
-        ReactDOM.render(<Container/>, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
+        */
+        // automatically rerender 
+        function App() {
+            const data = React.useState(0); // React.useState(default); returns array [data, setData]. In here setData is function to change value of data.
+            let [counter, setCounter] = data; // const [name1, name2, ...] = array; then name1 = array[0], name2 = array[1], ...
+            const onClick = () => {
+                setCounter(counter + 1);
+            }
+            return (
+                <div>
+                    <h3>Total Clicks: {counter}</h3>
+                    <button onClick={onClick}>Click me!</button>
+                </div>
+            );
+        }
+        ReactDOM.render(<App/>, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
     </script>
 </html>
