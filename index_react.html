@@ -27,13 +27,13 @@
             Click me! 
             </button>
         );
-        const container = (
+        const Container = () => (
             <div>
                 <Span/> 
                 <Btn/>
             </div>
         );
-        ReactDOM.render(container, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
+        ReactDOM.render(<Container/>, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
         //using React.createElement()
         /*
         const span = React.createElement(
