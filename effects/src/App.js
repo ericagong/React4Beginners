@@ -2,6 +2,24 @@ import { useState, useEffect } from 'react'
 import Button from './Button'
 import styles from './App.module.css'
 
+function Greeting() {
+  // Cleanup function : useEffect return function form in complex way
+  useEffect(() => {
+    console.log('Component created :)')
+    return () => console.log('Component destroyed :(')
+  })
+  // Cleanup function : useEffect return function form in clean way
+  function createdFn() {
+    console.log('created')
+    return destroyedFn
+  }
+  function destroyedFn() {
+    console.log('destroyed')
+  }
+  useEffect(createdFn, [])
+  return <h1>Hello</h1>
+}
+
 // All codes in component are called when any state changes.
 // To prevent this, use useEffect(function, [state]). function in useEffect is called only when [state] changes!
 function App() {
@@ -21,7 +39,10 @@ function App() {
     counter,
     keyword,
   ])
-
+  const [showing, setShowing] = useState(false)
+  const onClickShowing = () => {
+    setShowing((curr) => !curr)
+  }
   return (
     <div>
       <input
@@ -32,6 +53,8 @@ function App() {
       />
       <h1 className={styles.title}>{counter}</h1>
       <button onClick={onClickCounter}>Click me</button>
+      <button onClick={onClickShowing}>{showing ? 'Hide' : 'Show'}</button>
+      {showing ? <Greeting /> : null}
     </div>
   )
 }
