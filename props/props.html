@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- import React :: interactively create elements in JS and React automatically translates elements to HTML -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <!-- import React DOM :: Put all react element to html body -->
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- import Babel :: Change code to pure react form -->
+  <script src="https://unpkg.com/@babel/standalone@7.17.7/babel.min.js"></script>
+  <!-- import prop-types :: Put all react element to html body -->
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script type="text/babel">
+    function Btn(props) {
+      return (
+        <button style={{ fontSize: props.big ? 20 : 10 }}>
+          {props.content}
+        </button>
+      );
+    }
+    function BtnOpen({ content, z }) {
+      // variable name of descructuring assignment should be MATCHED!
+      return <button id={z}>{content}</button>;
+    }
+    function App() {
+      return (
+        <div>
+          <Btn content='Save' big={false} />
+          <Btn content='Continue' big={true} />
+          <BtnOpen content='Open' z={"openBtn"} />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
