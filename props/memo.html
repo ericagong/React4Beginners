@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- import React :: interactively create elements in JS and React automatically translates elements to HTML -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <!-- import React DOM :: Put all react element to html body -->
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- import Babel :: Change code to pure react form -->
+  <script src="https://unpkg.com/@babel/standalone@7.17.7/babel.min.js"></script>
+  <!-- import prop-types :: Put all react element to html body -->
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script type="text/babel">
+    function Btn({ content, onClick }) {
+      // For eventListner we should connect user-defined component's prop to original html tag's eventListening function.
+      console.log(`${content} Btn component re-rendered.`);
+      return <button onClick={onClick}>{content}</button>;
+    }
+    const MemorizedBtn = React.memo(Btn); // React.memo(Component) prevent useless re-rendering, by this enhances speed of page refreshing.
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => {
+        setValue("Revert Changes");
+      };
+      // onClick or style ... etc in user-defined component is just a prop, NOT AN EVENTLISTNER!
+      return (
+        <div>
+          <MemorizedBtn content={value} onClick={changeValue} />
+          <MemorizedBtn content='Continue' />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
