@@ -17,27 +17,25 @@
   <script type="text/babel">
     // add type property to script for using BABEL
     const root = document.getElementById("root");
-    // usint JSX and BABEL (BABEL translate JSX into React.createElement() form)
-    const Span = () => (
-      <span id='title' onMouseEnter={() => console.log("Mouse is on span!")}>
-        Hello, I'm your first span!
-      </span>
-    ); // Name of the component should start with Upper case
-    const Btn = () => (
-      <button
-        id='btn'
-        style={{ backgroundColor: "beige" }}
-        onClick={() => console.log("I'm clicked!")}
-      >
-        Click me!
-      </button>
-    );
-    const Container = () => (
-      <div>
-        <Span />
-        <Btn />
-      </div>
-    );
-    ReactDOM.render(<Container />, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
+    //using React.createElement()
+    const span = React.createElement(
+      "span",
+      {
+        id: "first-span",
+        style: { color: "black" },
+        onMouseEnter: () => console.log("Mouse is on span!"),
+      },
+      "Hello, I'm your first span!"
+    ); // React.createElement("htmlTagName", {propertyName : "propertyContent", ... }, "contents
+    const btn = React.createElement(
+      "button",
+      {
+        style: { backgroundColor: "beige" },
+        onClick: () => console.log("I'm clicked!"),
+      },
+      "Click me!"
+    ); // React.createElement("htmlTagName", {eventListener : arrow function }, "contents")
+    const container = React.createElement("div", null, [span, btn]);
+    ReactDOM.render(biggerContainer, root);
   </script>
 </html>
