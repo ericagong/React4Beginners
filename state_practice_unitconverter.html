@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unit Converter</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- import React :: interactively create elements in JS and React automatically translates elements to HTML -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <!-- import React DOM :: Put all react element to html body -->
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.17.7/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.querySelector("#root");
+    function App() {
+      const [amount, setAmount] = React.useState();
+      const [hours, setHours] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+      const handleChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const handleReset = () => {
+        setAmount(0);
+      };
+      const handleFlip = () => {
+        setAmount(0);
+        setFlipped((curr) => !curr);
+      };
+      return (
+        <div>
+          <h1 className='title'>Super Converter</h1>
+          <div>
+            <label htmlFor='minutes'>Minutes</label>
+            <input
+              id='minutes'
+              type='number'
+              placeholder='Minutes'
+              value={flipped ? amount * 60 : amount}
+              onChange={handleChange}
+              disabled={flipped === true}
+            />
+          </div>
+          <h4>
+            You want to convert {amount} {flipped ? "hours" : "minutes"}
+          </h4>
+          <div>
+            <label htmlFor='hours'>Hours</label>
+            <input
+              id='hours'
+              type='number'
+              placeholder='Hours'
+              value={flipped ? amount : amount / 60}
+              onChange={handleChange}
+              disabled={flipped === false}
+            />
+          </div>
+          <button id='reset' onClick={handleReset}>
+            Reset
+          </button>
+          <button id='flip' onClick={handleFlip}>
+            {flipped ? "Flip Back" : "Flip"}
+          </button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

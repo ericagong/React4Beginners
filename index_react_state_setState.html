@@ -17,29 +17,21 @@
   <script type="text/babel">
     // add type property to script for using BABEL
     const root = document.getElementById("root");
-    // usint JSX and BABEL (BABEL translate JSX into React.createElement() form)
-    function Span() {
+    // automatically rerendering
+    function Container() {
+      const data = React.useState(0); // React.useState(default); returns array [data, setData]. In here setData is function to change value of data.
+      const [counter, setCounter] = data; // const [name1, name2, ...] = array; then name1 = array[0], name2 = array[1], ...
+      const onClick = () => {
+        // setCounter(counter + 1); // setCounter(data change) -- directly change data, cannot protect unexpected data change
+        setCounter((current) => current + 1); //setCounter(function); -- change data based on the current state
+      };
       return (
-        <span id='title' onMouseEnter={() => console.log("Mouse is on span!")}>
-          Hello, I'm your first span!
-        </span>
+        <div>
+          <h3>Total Clicks: {counter}</h3>
+          <button onClick={onClick}>Click me!</button>
+        </div>
       );
-    } // Name of the component should start with Upper case
-    const Btn = () => (
-      <button
-        id='btn'
-        style={{ backgroundColor: "beige" }}
-        onClick={() => console.log("I'm clicked!")}
-      >
-        Click me!
-      </button>
-    );
-    const Container = () => (
-      <div>
-        <Span />
-        <Btn />
-      </div>
-    );
+    }
     ReactDOM.render(<Container />, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
   </script>
 </html>

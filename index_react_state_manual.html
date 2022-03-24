@@ -16,30 +16,19 @@
   <script src="https://unpkg.com/@babel/standalone@7.17.7/babel.min.js"></script>
   <script type="text/babel">
     // add type property to script for using BABEL
-    const root = document.getElementById("root");
-    // usint JSX and BABEL (BABEL translate JSX into React.createElement() form)
-    function Span() {
-      return (
-        <span id='title' onMouseEnter={() => console.log("Mouse is on span!")}>
-          Hello, I'm your first span!
-        </span>
-      );
-    } // Name of the component should start with Upper case
-    const Btn = () => (
-      <button
-        id='btn'
-        style={{ backgroundColor: "beige" }}
-        onClick={() => console.log("I'm clicked!")}
-      >
-        Click me!
-      </button>
-    );
+    const root = document.querySelector("#root");
+    let counter = 0;
+    // If State does not exist, then we should manually render again with ReactDOM.render().
+    function onClickBtn() {
+      counter = counter + 1;
+      ReactDOM.render(<Container />, root); // Without manual render, page DOES NOT RENDER itself even though its contents changed.
+    }
     const Container = () => (
       <div>
-        <Span />
-        <Btn />
+        <h3>Total Clicks: {counter}</h3>
+        <button onClick={onClickBtn}>Click me!</button>
       </div>
     );
-    ReactDOM.render(<Container />, root); // ReactDOM.render(element or [element1, element2, ...], parentHTMLTagID)
+    ReactDOM.render(<Container />, root);
   </script>
 </html>
